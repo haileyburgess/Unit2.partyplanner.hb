@@ -46,7 +46,7 @@ function renderParties() {
 //create elements on the page for each party
 
 // Loop through the parties and create <li> elements
-state.parties.forEach((party) => {
+state.parties.forEach(party => {
   const partyItem = document.createElement("li");
   partyItem.textContent = party.name; // Assuming each party object has a 'name' property
   partiesList.appendChild(partyItem);
