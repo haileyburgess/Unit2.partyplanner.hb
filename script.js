@@ -47,16 +47,24 @@ async function render() {
     renderParties();
   }
 
+//posting new party to the api
+async function addParty(name, date, time, description) {
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, date, time, description }),
+      });
+      const result = await response.json();
+      console.log(result);
+      state.parties.push(result);
+      renderParties();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   //add parties using the addParty form in the html
-const addPartyForm = document.querySelector("#addParty");
-addPartyForm.addEventListener("submit", addParty);
-  render();
-
-//create elements on the page for each party
-
-// Loop through the parties and create <li> elements
-// state.parties.forEach((party) => {
-//   const partyItem = document.createElement("li");
-//   partyItem.textContent = party.name; // Assuming each party object has a 'name' property
-//   partiesList.appendChild(partyItem);
-// });
+  const addPartyForm = document.querySelector("#addParty");
+  addPartyForm.addEventListener("submit", addParty);
+    render();
