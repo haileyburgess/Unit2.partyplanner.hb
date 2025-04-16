@@ -48,17 +48,27 @@ async function render() {
   }
 
 //posting new party to the api
-async function addParty(name, date, time, description) {
+async function addParty(event) {
+    event.preventDefault();
+
+    const name = document.querySelector("#name").value;
+    const description = document.querySelector("#description").value;
+    const date = document.querySelector("#date").value;
+    const location = document.querySelector("#location").value;
+
     try {
       const response = await fetch(API_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, date, time, description }),
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify({ name, description, date, location }),
       });
-      const result = await response.json();
-      console.log(result);
-      state.parties.push(result);
+      const newParty = await response.json();
+      console.log("New party", newParty);
+
+      state.parties.push(newParty);
+
       renderParties();
+
     } catch (error) {
       console.error(error);
     }
