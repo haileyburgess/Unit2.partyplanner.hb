@@ -73,7 +73,7 @@ async function  createParty(name, description, date,location) {
         body: JSON.stringify({ name, description, date, location }),
       });
       const newParty = await response.json();
-      console.log(newParty);
+      console.log( newParty);
 
       state.parties.push(newParty);
 
