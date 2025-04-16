@@ -51,12 +51,21 @@ async function render() {
 async function addParty(event) {
     event.preventDefault();
 
-    const name = document.querySelector("#name").value;
-    const description = document.querySelector("#description").value;
-    const date = document.querySelector("#date").value;
-    const location = document.querySelector("#location").value;
-console.log(JSON.stringify({ name, description, date, location}));
+await createParty(
+    addPartyForm.name.value,
+    addPartyForm.description.value,
+    addPartyForm.date.value,
+    addPartyForm.location.value
+);
+}
 
+    // const name = document.querySelector("#name").value;
+    // const description = document.querySelector("#description").value;
+    // const date = document.querySelector("#date").value;
+    // const location = document.querySelector("#location").value;
+    
+console.log(JSON.stringify({ name, description, date, location}));
+async function  createParty(name, description, date,location) {
     try {
       const response = await fetch(API_URL, {
         method: "POST",
@@ -64,7 +73,7 @@ console.log(JSON.stringify({ name, description, date, location}));
         body: JSON.stringify({ name, description, date, location }),
       });
       const newParty = await response.json();
-      console.log("New party", newParty);
+      console.log(newParty);
 
       state.parties.push(newParty);
 
