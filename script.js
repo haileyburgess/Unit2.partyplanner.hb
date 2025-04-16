@@ -55,6 +55,7 @@ async function addParty(event) {
     const description = document.querySelector("#description").value;
     const date = document.querySelector("#date").value;
     const location = document.querySelector("#location").value;
+console.log(JSON.stringify({ name, description, date, location}));
 
     try {
       const response = await fetch(API_URL, {
